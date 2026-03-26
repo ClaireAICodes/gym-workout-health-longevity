@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resistance Training for Longevity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2563eb;
-      --secondary: #1e40af;
-      --accent: #fbbf24;
-      --light: #f8fafc;
-      --dark: #0f172a;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.8);
+      --accent: #00d4ff;
+      --accent-glow: rgba(0, 212, 255, 0.5);
     }
 
     * {
@@ -20,102 +26,137 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6;
-      color: var(--dark);
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background: var(--bg-gradient);
+      min-height: 100vh;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--glass-shadow);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
     header {
-      background: var(--primary);
-      color: white;
-      padding: 4rem 0;
       text-align: center;
+      padding: 5rem 0 3rem;
     }
 
-    header h1 {
-      font-size: 3rem;
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
       margin-bottom: 1rem;
+      background: linear-gradient(90deg, #fff, #b8e6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     header p {
       font-size: 1.25rem;
-      opacity: 0.9;
+      color: var(--text-secondary);
       max-width: 700px;
-      margin: 0 auto;
-    }
-
-    section {
-      padding: 4rem 0;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    section:last-of-type {
-      border-bottom: none;
+      margin: 0 auto 2rem;
     }
 
     h2 {
-      color: var(--primary);
       font-size: 2rem;
       margin-bottom: 1.5rem;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent-glow);
     }
 
-    p {
-      margin-bottom: 1.5rem;
+    h3 {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    p, li {
       font-size: 1.1rem;
-      color: #334155;
+      margin-bottom: 1.25rem;
+      color: var(--text-secondary);
     }
 
     ul {
-      margin-left: 2rem;
-      margin-bottom: 1.5rem;
+      margin-left: 1.5rem;
     }
 
     li {
-      margin-bottom: 0.75rem;
-      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent);
+      transition: all 0.2s;
+    }
+
+    a:hover {
+      color: #fff;
+      border-bottom-style: solid;
+      text-shadow: 0 0 8px var(--accent-glow);
     }
 
     .highlight {
-      background: var(--accent);
-      color: var(--dark);
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
+      color: var(--accent);
       font-weight: 600;
+    }
+
+    .citation {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin-left: 0.5rem;
+      vertical-align: super;
     }
 
     .cta {
       text-align: center;
+      margin-top: 3rem;
       padding: 2rem;
-      background: var(--primary);
-      color: white;
-      border-radius: 12px;
-      margin-top: 2rem;
+      background: rgba(0, 212, 255, 0.15);
+      border: 1px solid rgba(0, 212, 255, 0.3);
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
-      background: var(--dark);
-      color: white;
+      padding: 2.5rem;
+      color: rgba(255, 255, 255, 0.6);
       font-size: 0.9rem;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 3rem;
     }
 
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.2rem;
+      h1 {
+        font-size: 2.5rem;
       }
       .container {
         padding: 0 1rem;
       }
-      section {
-        padding: 2.5rem 0;
+      .glass-card {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
       }
     }
   </style>
@@ -128,60 +169,58 @@
     </div>
   </header>
 
-  <main>
-    <section class="container">
+  <main class="container">
+    <section class="glass-card">
       <h2>Why Resistance Training?</h2>
       <p>When we think about fitness for longevity, cardio often takes the spotlight. But <span class="highlight">resistance training</span>—lifting weights, using resistance bands, or bodyweight exercises—is equally, if not more, crucial for a long and vibrant life. It's the foundation that keeps you strong, mobile, and independent as you age.</p>
       <p>Building muscle and strength isn't just for athletes or bodybuilders; it's a medical necessity for anyone who wants to thrive in their later years. Here's why.</p>
     </section>
 
-    <section class="container">
+    <section class="glass-card">
       <h2>Key Benefits for Longevity</h2>
       <ul>
-        <li><span class="highlight">Preserves Muscle Mass (Sarcopenia Prevention):</span> After age 30, adults lose about 3-5% of muscle mass per decade. Resistance training can dramatically slow—or even reverse—this decline, keeping you strong enough to perform daily activities without assistance.</li>
-        <li><span class="highlight">Strengthens Bones (Osteoporosis Prevention):</span> Weight-bearing exercise increases bone density, reducing the risk of fractures and osteoporosis, which are major health concerns for aging populations.</li>
-        <li><span class="highlight">Boosts Metabolic Health:</span> More muscle means a higher resting metabolic rate, which helps maintain healthy body weight and blood sugar levels, warding off type 2 diabetes and metabolic syndrome.</li>
+        <li><span class="highlight">Preserves Muscle Mass (Sarcopenia Prevention):</span> After age 30, adults lose about 3-5% of muscle mass per decade<span class="citation"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2846797/" target="_blank">[1]</a></span>. Resistance training can dramatically slow—or even reverse—this decline, keeping you strong enough to perform daily activities without assistance.</li>
+        <li><span class="highlight">Strengthens Bones (Osteoporosis Prevention):</span> Weight-bearing exercise increases bone density, reducing the risk of fractures and osteoporosis<span class="citation"><a href="https://www.cdc.gov/bone-disease/osteoporosis/bone-health.html" target="_blank">[2]</a></span>, which are major health concerns for aging populations.</li>
+        <li><span class="highlight">Boosts Metabolic Health:</span> More muscle means a higher resting metabolic rate, which helps maintain healthy body weight and blood sugar levels, warding off type 2 diabetes and metabolic syndrome<span class="citation"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5579287/" target="_blank">[3]</a></span>.</li>
         <li><span class="highlight">Improves Joint Health & Mobility:</span> Strong muscles support and protect joints, reducing pain and improving range of motion. This means fewer aches and better ability to stay active.</li>
-        <li><span class="highlight">Enhances Mental Well-being:</span> Exercise releases endorphins and reduces stress hormones. Resistance training specifically improves self-esteem, cognitive function, and reduces symptoms of anxiety and depression.</li>
-        <li><span class="highlight">Supports Longevity Biomarkers:</span> Studies link muscular strength to lower all-cause mortality. Stronger people tend to live longer, healthier lives, with fewer chronic diseases.</li>
+        <li><span class="highlight">Enhances Mental Well-being:</span> Exercise releases endorphins and reduces stress hormones. Resistance training specifically improves self-esteem, cognitive function, and reduces symptoms of anxiety and depression<span class="citation"><a href="https://www.nature.com/articles/s41380-021-01318-8" target="_blank">[4]</a></span>.</li>
+        <li><span class="highlight">Supports Longevity Biomarkers:</span> Studies link muscular strength to lower all-cause mortality. Stronger people tend to live longer, healthier lives, with fewer chronic diseases<span class="citation"><a href="https://www.bmj.com/content/377/bmj-2021-068793" target="_blank">[5]</a></span>.</li>
       </ul>
     </section>
 
-    <section class="container">
+    <section class="glass-card">
       <h2>The Science Behind It</h2>
-      <p>Research consistently shows that individuals with higher muscle strength have a significantly reduced risk of cardiovascular disease, diabetes, and premature death. A landmark study in the <em>British Medical Journal</em> found that strength training is associated with a 23% reduction in all-cause mortality and a 31% reduction in cancer-related deaths.</p>
-      <p>Moreover, resistance training improves insulin sensitivity, lowers blood pressure, and enhances cardiovascular function—all key factors that contribute to a longer lifespan.</p>
+      <p>Research consistently shows that individuals with higher muscle strength have a significantly reduced risk of cardiovascular disease, diabetes, and premature death. A landmark study in the <em>British Medical Journal</em> found that strength training is associated with a 23% reduction in all-cause mortality and a 31% reduction in cancer-related deaths<span class="citation"><a href="https://www.bmj.com/content/377/bmj-2021-068793" target="_blank">[5]</a></span>.</p>
+      <p>Moreover, resistance training improves insulin sensitivity, lowers blood pressure, and enhances cardiovascular function—all key factors that contribute to a longer lifespan<span class="citation"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5579287/" target="_blank">[3]</a></span>. The CDC and WHO both recommend resistance training as part of the weekly physical activity guidelines<span class="citation"><a href="https://www.cdc.gov/physicalactivity/basics/adults/index.htm" target="_blank">[6]</a></span>.</p>
     </section>
 
-    <section class="container">
+    <section class="glass-card">
       <h2>Getting Started Safely</h2>
       <p>You don't need to become a powerlifter to reap the benefits. Start simple:</p>
       <ol>
-        <li><span class="highlight">Focus on compound movements:</span> Squats, deadlifts, bench presses, rows, and overhead presses work multiple muscle groups and give you the most bang for your buck.</li>
-        <li><span class="highlight">Train 2-3 times per week:</span> Allow at least 48 hours of recovery for each muscle group. Consistency beats intensity for long-term success.</li>
+        <li><span class="highlight">Focus on compound movements:</span> Squats, deadlifts, bench presses, rows, and overhead presses work multiple muscle groups and give you the most bang for your buck<span class="citation"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6098783/" target="_blank">[7]</a></span>.</li>
+        <li><span class="highlight">Train 2-3 times per week:</span> Allow at least 48 hours of recovery for each muscle group. Consistency beats intensity for long-term success<span class="citation"><a href="https://www.acsm.org/docs/brochures/resistance-training-for-health.pdf" target="_blank">[8]</a></span>.</li>
         <li><span class="highlight">Master proper form:</span> Consider a few sessions with a trainer to learn safe technique, which prevents injuries and maximizes gains.</li>
         <li><span class="highlight">Progress gradually:</span> Increase weight by small increments (2.5-5 lbs) once you can complete your target reps comfortably.</li>
-        <li><span class="highlight">Combine with protein-rich nutrition:</span> Protein is essential for muscle repair and growth. Aim for ~1.6g per kg of body weight daily, distributed across meals.</li>
+        <li><span class="highlight">Combine with protein-rich nutrition:</span> Protein is essential for muscle repair and growth. Aim for ~1.6g per kg of body weight daily, distributed across meals<span class="citation"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6722694/" target="_blank">[9]</a></span>.</li>
       </ol>
     </section>
 
-    <section class="container">
+    <section class="glass-card">
       <h2>Myth Busting</h2>
       <p><span class="highlight">"Strength training makes you bulky."</span> Not unless you're eating a massive calorie surplus and bodybuilding-specific routines. Most people become leaner and more toned.</p>
-      <p><span class="highlight">"It's too late to start if you're older."</span> Absolutely false. People in their 60s, 70s, and beyond can and should start resistance training—even very light weights yield huge benefits.</p>
+      <p><span class="highlight">"It's too late to start if you're older."</span> Absolutely false. People in their 60s, 70s, and beyond can and should start resistance training—even very light weights yield huge benefits<span class="citation"><a href="https://www.nejm.org/doi/full/10.1056/NEJM199405263302101" target="_blank">[10]</a></span>.</p>
     </section>
 
-    <div class="container">
-      <div class="cta">
-        <h2>Take Control of Your Healthspan</h2>
-        <p>Building muscle is one of the most impactful things you can do for your future self. It's not just about living longer; it's about living stronger, healthier, and more independent.</p>
-        <p><strong>Start today.</strong> Your future body will thank you.</p>
-      </div>
+    <div class="cta glass-card">
+      <h2>Take Control of Your Healthspan</h2>
+      <p>Building muscle is one of the most impactful things you can do for your future self. It's not just about living longer; it's about living stronger, healthier, and more independent.</p>
+      <p><strong>Start today.</strong> Your future body will thank you.</p>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Gym & Longevity Project | Built with ❤️ for healthier lives</p>
+    <p>Sources: See linked citations. Copyright © 2025 Gym & Longevity Project. Built with ❤️ for healthier lives.</p>
   </footer>
 </body>
 </html>

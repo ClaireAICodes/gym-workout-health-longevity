@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resistance Training for Longevity</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      --glass-bg: rgba(255, 255, 255, 0.12);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      --accent: #60a5fa;
-      --accent-glow: rgba(96, 165, 250, 0.5);
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.3);
+      --success: #34d399;
+      --gradient-start: #0f172a;
+      --gradient-mid: #1e293b;
+      --gradient-end: #0f172a;
     }
 
     * {
@@ -26,194 +31,370 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      line-height: 1.7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
       color: var(--text-primary);
-      background: var(--bg-gradient);
+      background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
       min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      box-shadow: var(--glass-shadow);
-      padding: 2.5rem;
-      margin: 2rem 0;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Animated background blobs */
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      z-index: -1;
+      animation: float 20s infinite ease-in-out;
     }
-
-    .glass-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+    .blob-1 {
+      top: -10%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: var(--accent);
+    }
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: #8b5cf6;
+      animation-delay: -5s;
+    }
+    .blob-3 {
+      top: 40%;
+      left: 30%;
+      width: 400px;
+      height: 400px;
+      background: #ec4899;
+      animation-delay: -10s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     header {
       text-align: center;
-      padding: 5rem 0 3rem;
+      padding: 6rem 0 4rem;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, #fff, #b8e6ff);
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, #a78bfa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-shadow: 0 0 60px var(--accent-glow);
     }
 
     header p {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto 2rem;
+      max-width: 750px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: var(--glass-shadow);
+      padding: 3rem;
+      margin: 2.5rem 0;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent));
+      border-radius: 24px 24px 0 0;
     }
 
     h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: var(--accent);
-      text-shadow: 0 0 10px var(--accent-glow);
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1.75rem;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
     }
 
     h3 {
-      font-size: 1.5rem;
-      margin: 1.5rem 0 0.75rem;
-      color: var(--text-secondary);
+      font-size: 1.6rem;
+      margin: 1.75rem 0 0.75rem;
+      color: var(--text-primary);
+      font-weight: 600;
     }
 
     p, li {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       margin-bottom: 1.25rem;
       color: var(--text-secondary);
     }
 
-    ul {
+    ul, ol {
       margin-left: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding-left: 0.5rem;
+      position: relative;
     }
 
-    a {
+    ul li::marker {
       color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px dashed var(--accent);
-      transition: all 0.2s;
     }
 
-    a:hover {
-      color: #fff;
-      border-bottom-style: solid;
-      text-shadow: 0 0 8px var(--accent-glow);
+    ol li {
+      counter-increment: item;
+    }
+
+    ol li::before {
+      content: counter(item) ".";
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 0.5rem;
     }
 
     .highlight {
       color: var(--accent);
       font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .highlight:hover {
+      background: rgba(56, 189, 248, 0.2);
+      text-shadow: 0 0 10px var(--accent-glow);
     }
 
     .cta {
       text-align: center;
       margin-top: 3rem;
-      padding: 2rem;
-      background: rgba(96, 165, 250, 0.15);
-      border: 1px solid rgba(96, 165, 250, 0.3);
+      padding: 3rem;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(167, 139, 250, 0.15));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+      animation: pulse 4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta h2 {
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
     }
 
     footer {
       text-align: center;
-      padding: 2.5rem;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
+      padding: 3rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
       border-top: 1px solid var(--glass-border);
-      margin-top: 3rem;
+      margin-top: 4rem;
+      position: relative;
+      z-index: 1;
     }
 
     @media (max-width: 768px) {
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
+      }
+      h2 {
+        font-size: 2rem;
       }
       .container {
-        padding: 0 1rem;
+        padding: 0 1.5rem;
       }
       .glass-card {
-        padding: 1.5rem;
+        padding: 2rem;
         margin: 1.5rem 0;
       }
+      header {
+        padding: 4rem 0 2.5rem;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Selection color */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-dark);
+    }
+
+    /* Focus states for accessibility */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
+  <!-- Animated background elements -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <div class="container">
+    <header>
       <h1>💪 Resistance Training for a Longer, Healthier Life</h1>
       <p>Discover how building muscle and strength isn't just about looks—it's your most powerful tool for long-term health, wellness, and longevity.</p>
-    </div>
-  </header>
+    </header>
 
-  <main class="container">
-    <section class="glass-card">
-      <h2>Why Resistance Training?</h2>
-      <p>When we think about fitness for longevity, cardio often takes the spotlight. But <span class="highlight">resistance training</span>—lifting weights, using resistance bands, or bodyweight exercises—is equally, if not more, crucial for a long and vibrant life. It's the foundation that keeps you strong, mobile, and independent as you age.</p>
-      <p>Building muscle and strength isn't just for athletes or bodybuilders; it's a medical necessity for anyone who wants to thrive in their later years. Here's why.</p>
-    </section>
+    <main>
+      <section class="glass-card">
+        <h2>Why Resistance Training?</h2>
+        <p>When we think about fitness for longevity, cardio often takes the spotlight. But <span class="highlight">resistance training</span>—lifting weights, using resistance bands, or bodyweight exercises—is equally, if not more, crucial for a long and vibrant life. It's the foundation that keeps you strong, mobile, and independent as you age.</p>
+        <p>Building muscle and strength isn't just for athletes or bodybuilders; it's a medical necessity for anyone who wants to thrive in their later years. Here's why.</p>
+      </section>
 
-    <section class="glass-card">
-      <h2>Key Benefits for Longevity</h2>
-      <ul>
-        <li><span class="highlight">Preserves Muscle Mass:</span> After age 30, adults lose about 3-5% of muscle mass per decade. Resistance training can dramatically slow—or even reverse—this decline, keeping you strong enough to perform daily activities without assistance.</li>
-        <li><span class="highlight">Strengthens Bones:</span> Weight-bearing exercise increases bone density, reducing the risk of fractures and osteoporosis, which are major health concerns for aging populations.</li>
-        <li><span class="highlight">Boosts Metabolic Health:</span> More muscle means a higher resting metabolic rate, which helps maintain healthy body weight and blood sugar levels, warding off type 2 diabetes and metabolic syndrome.</li>
-        <li><span class="highlight">Improves Joint Health & Mobility:</span> Strong muscles support and protect joints, reducing pain and improving range of motion. This means fewer aches and better ability to stay active.</li>
-        <li><span class="highlight">Enhances Mental Well-being:</span> Exercise releases endorphins and reduces stress hormones. Resistance training specifically improves self-esteem, cognitive function, and reduces symptoms of anxiety and depression.</li>
-        <li><span class="highlight">Supports Longevity Biomarkers:</span> Studies link muscular strength to lower all-cause mortality. Stronger people tend to live longer, healthier lives, with fewer chronic diseases.</li>
-      </ul>
-    </section>
+      <section class="glass-card">
+        <h2>Key Benefits for Longevity</h2>
+        <ul>
+          <li><span class="highlight">Preserves Muscle Mass:</span> After age 30, adults lose about 3-5% of muscle mass per decade. Resistance training can dramatically slow—or even reverse—this decline, keeping you strong enough to perform daily activities without assistance.</li>
+          <li><span class="highlight">Strengthens Bones:</span> Weight-bearing exercise increases bone density, reducing the risk of fractures and osteoporosis, which are major health concerns for aging populations.</li>
+          <li><span class="highlight">Boosts Metabolic Health:</span> More muscle means a higher resting metabolic rate, which helps maintain healthy body weight and blood sugar levels, warding off metabolic syndrome and type 2 diabetes.</li>
+          <li><span class="highlight">Improves Joint Health & Mobility:</span> Strong muscles support and protect joints, reducing pain and improving range of motion. This means fewer aches and better ability to stay active.</li>
+          <li><span class="highlight">Enhances Mental Well-being:</span> Exercise releases endorphins and reduces stress hormones. Resistance training specifically improves self-esteem, cognitive function, and reduces symptoms of anxiety and depression.</li>
+          <li><span class="highlight">Supports Longevity Biomarkers:</span> Studies link muscular strength to lower all-cause mortality. Stronger people tend to live longer, healthier lives, with fewer chronic diseases.</li>
+        </ul>
+      </section>
 
-    <section class="glass-card">
-      <h2>The Science Behind It</h2>
-      <p>Research consistently shows that individuals with higher muscle strength have a significantly reduced risk of cardiovascular disease, diabetes, and premature death. A landmark study found that strength training is associated with a 23% reduction in all-cause mortality and a 31% reduction in cancer-related deaths.</p>
-      <p>Moreover, resistance training improves insulin sensitivity, lowers blood pressure, and enhances cardiovascular function—all key factors that contribute to a longer lifespan. The CDC and WHO both recommend resistance training as part of the weekly physical activity guidelines.</p>
-    </section>
+      <section class="glass-card">
+        <h2>The Science Behind It</h2>
+        <p>Research consistently shows that individuals with higher muscle strength have a significantly reduced risk of cardiovascular disease, diabetes, and premature death. A landmark study found that strength training is associated with a 23% reduction in all-cause mortality and a 31% reduction in cancer-related deaths.</p>
+        <p>Moreover, resistance training improves insulin sensitivity, lowers blood pressure, and enhances cardiovascular function—all key factors that contribute to a longer lifespan. The CDC and WHO both recommend resistance training as part of the weekly physical activity guidelines.</p>
+      </section>
 
-    <section class="glass-card">
-      <h2>Getting Started Safely</h2>
-      <p>You don't need to become a powerlifter to reap the benefits. Start simple:</p>
-      <ol>
-        <li><span class="highlight">Focus on compound movements:</span> Squats, deadlifts, bench presses, rows, and overhead presses work multiple muscle groups and give you the most bang for your buck.</li>
-        <li><span class="highlight">Train 2-3 times per week:</span> Allow at least 48 hours of recovery for each muscle group. Consistency beats intensity for long-term success.</li>
-        <li><span class="highlight">Master proper form:</span> Consider a few sessions with a trainer to learn safe technique, which prevents injuries and maximizes gains.</li>
-        <li><span class="highlight">Progress gradually:</span> Increase weight by small increments (2.5-5 lbs) once you can complete your target reps comfortably.</li>
-        <li><span class="highlight">Combine with protein-rich nutrition:</span> Protein is essential for muscle repair and growth. Aim for approximately 1.6g per kg of body weight daily, distributed across meals.</li>
-      </ol>
-    </section>
+      <section class="glass-card">
+        <h2>Getting Started Safely</h2>
+        <p>You don't need to become a powerlifter to reap the benefits. Start simple:</p>
+        <ol>
+          <li><span class="highlight">Focus on compound movements:</span> Squats, deadlifts, bench presses, rows, and overhead presses work multiple muscle groups and give you the most bang for your buck.</li>
+          <li><span class="highlight">Train 2-3 times per week:</span> Allow at least 48 hours of recovery for each muscle group. Consistency beats intensity for long-term success.</li>
+          <li><span class="highlight">Master proper form:</span> Consider a few sessions with a trainer to learn safe technique, which prevents injuries and maximizes gains.</li>
+          <li><span class="highlight">Progress gradually:</span> Increase weight by small increments (2.5-5 lbs) once you can complete your target reps comfortably.</li>
+          <li><span class="highlight">Combine with protein-rich nutrition:</span> Protein is essential for muscle repair and growth. Aim for approximately 1.6g per kg of body weight daily, distributed across meals.</li>
+        </ol>
+      </section>
 
-    <section class="glass-card">
-      <h2>Myth Busting</h2>
-      <p><span class="highlight">"Strength training makes you bulky."</span> Not unless you're eating a massive calorie surplus and bodybuilding-specific routines. Most people become leaner and more toned.</p>
-      <p><span class="highlight">"It's too late to start if you're older."</span> Absolutely false. People in their 60s, 70s, and beyond can and should start resistance training—even very light weights yield huge benefits.</p>
-    </section>
+      <section class="glass-card">
+        <h2>Myth Busting</h2>
+        <p><span class="highlight">"Strength training makes you bulky."</span> Not unless you're eating a massive calorie surplus and bodybuilding-specific routines. Most people become leaner and more toned.</p>
+        <p><span class="highlight">"It's too late to start if you're older."</span> Absolutely false. People in their 60s, 70s, and beyond can and should start resistance training—even very light weights yield huge benefits.</p>
+      </section>
 
-    <div class="cta glass-card">
-      <h2>Take Control of Your Healthspan</h2>
-      <p>Building muscle is one of the most impactful things you can do for your future self. It's not just about living longer; it's about living stronger, healthier, and more independent.</p>
-      <p><strong>Start today.</strong> Your future body will thank you.</p>
-    </div>
-  </main>
+      <div class="cta">
+        <div class="cta-content">
+          <h2>Take Control of Your Healthspan</h2>
+          <p>Building muscle is one of the most impactful things you can do for your future self. It's not just about living longer; it's about living stronger, healthier, and more independent.</p>
+          <p><strong>Start today.</strong> Your future body will thank you.</p>
+          <a href="#getting-started" class="btn">Begin Your Journey</a>
+        </div>
+      </div>
+    </main>
 
-  <footer>
-    <p>Copyright © 2025 Gym & Longevity Project. Built with ❤️ for healthier lives.</p>
-  </footer>
+    <footer>
+      <p>Copyright © 2025 Gym & Longevity Project. Built with ❤️ for healthier lives.</p>
+    </footer>
+  </div>
 </body>
 </html>
